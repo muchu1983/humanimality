@@ -101,7 +101,6 @@ describe("tiny_adventure", () => {
           lastValidBlockHeight,
           signature: txHash,
         });
-
     }
 
   });
