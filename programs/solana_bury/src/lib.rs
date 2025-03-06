@@ -19,8 +19,11 @@ pub mod solana_bury {
         Ok(())
     }
 
-    pub fn worship(ctx: Context<WorshipCtx>) -> Result<()> {
+    pub fn worship(ctx: Context<WorshipCtx>, whose_tombstone: String) -> Result<()> {
         // 祭拜指令
+        let blessings_account: &mut Account<Blessings> = &mut ctx.accounts.blessings_account;
+        blessings_account.worshipper = *ctx.accounts.worshipper.key;
+        blessings_account.whose_tombstone = whose_tombstone;
         Ok(())
     }
 }
@@ -50,8 +53,24 @@ pub struct BuryCtx<'info> {
 }
 
 #[derive(Accounts)]
-pub struct WorshipCtx {
+#[instruction(whose_tombstone: String)]
+pub struct WorshipCtx<'info> {
     //祭拜指令所需的參數account
+    #[account(
+        init,
+        seeds = [
+            "solana_bury".as_bytes(),
+            whose_tombstone.as_bytes(),
+            worshipper.key().as_ref()
+        ],
+        bump,
+        payer = worshipper,
+        space = 8 + Blessings::INIT_SPACE
+    )]
+    pub blessings_account: Account<'info, Blessings>,
+    #[account(mut)]
+    pub worshipper: Signer<'info>,
+    pub system_program: Program<'info, System>,
 }
 
 #[account]
@@ -69,4 +88,5 @@ pub struct Blessings {
     //祭拜祝詞區塊
     #[max_len(64)]
     whose_tombstone: String,
+    pub worshipper: Pubkey
 }
