@@ -87,6 +87,6 @@ pub struct Tombstone {
 pub struct Blessings {
     //祭拜祝詞區塊
     #[max_len(64)]
-    whose_tombstone: String,
+    pub whose_tombstone: String,
     pub worshipper: Pubkey
 }
