@@ -27,11 +27,10 @@ describe("solana_bury", () => {
   it("test bury", async () => {
     // 測試埋葬指令
     let txHash;
-    let test_tombstone_account;
 
     const [bennu_tombstone_account] =
       PublicKey.findProgramAddressSync([
-        Buffer.from("solana_bury", "utf8"),
+        Buffer.from("solana_bury_tombstone", "utf8"),
         Buffer.from("Bennu", "utf8"),
         tester_pubkey.toBuffer()
         ],
@@ -60,18 +59,40 @@ describe("solana_bury", () => {
     }
   });
 
-  // it("test worship", async () => {
-  //   // 測試祭拜指令
+  it("test worship", async () => {
+    // 測試祭拜指令
+    let txHash;
 
-  //   async function logTransaction(txHash) {
-  //     const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
-  //     await connection.confirmTransaction({
-  //         blockhash,
-  //         lastValidBlockHeight,
-  //         signature: txHash,
-  //       });
-  //   }
-  // });
+    const [bennu_blessings_account] =
+      PublicKey.findProgramAddressSync([
+        Buffer.from("solana_bury_blessings", "utf8"),
+        Buffer.from("Bennu", "utf8"),
+        tester_pubkey.toBuffer()
+        ],
+        program.programId
+      );
+    console.log(bennu_blessings_account)
+
+    txHash = await program.methods
+      .worship(whose_tombstone)
+      .accounts({
+        blessings_account: bennu_blessings_account,
+        worshipper: tester_pubkey,
+        systemProgram: SystemProgram.programId,
+      })
+      .rpc();
+    console.log(txHash)
+
+    await logTransaction(txHash);
+    async function logTransaction(txHash) {
+      const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
+      await connection.confirmTransaction({
+          blockhash,
+          lastValidBlockHeight,
+          signature: txHash,
+        });
+    }
+  });
 
 
 });

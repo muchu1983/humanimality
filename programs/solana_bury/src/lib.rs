@@ -40,7 +40,7 @@ pub struct BuryCtx<'info> {
     #[account(
         init_if_needed,
         seeds = [
-            "solana_bury".as_bytes(),
+            "solana_bury_tombstone".as_bytes(),
             whose_tombstone.as_bytes(),
             celebrant.key().as_ref()
         ],
@@ -61,7 +61,7 @@ pub struct WorshipCtx<'info> {
     #[account(
         init_if_needed,
         seeds = [
-            "solana_bury".as_bytes(),
+            "solana_bury_blessings".as_bytes(),
             whose_tombstone.as_bytes(),
             worshipper.key().as_ref()
         ],
