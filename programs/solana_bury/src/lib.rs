@@ -13,20 +13,18 @@ pub mod solana_bury {
 
     pub fn bury(ctx: Context<BuryCtx>, whose_tombstone: String) -> Result<()> {
         // 埋葬指令
-        ctx.accounts.tombstone_account.whose_tombstone = "Bennu".to_string();
-        // let tombstone_account: &mut Account<Tombstone> = &mut ctx.accounts.tombstone_account;
-        // tombstone_account.celebrant = *ctx.accounts.celebrant.key;
-        // tombstone_account.whose_tombstone = whose_tombstone;
+        let tombstone_account: &mut Account<Tombstone> = &mut ctx.accounts.tombstone_account;
+        tombstone_account.whose_tombstone = whose_tombstone;
+        tombstone_account.celebrant = *ctx.accounts.celebrant.key;
         msg!("bury {:?}", "Bennu");
         Ok(())
     }
 
     pub fn worship(ctx: Context<WorshipCtx>, whose_tombstone: String) -> Result<()> {
         // 祭拜指令
-        ctx.accounts.blessings_account.whose_tombstone = "Bennu".to_string();
-        // let blessings_account: &mut Account<Blessings> = &mut ctx.accounts.blessings_account;
-        // blessings_account.worshipper = *ctx.accounts.worshipper.key;
-        // blessings_account.whose_tombstone = whose_tombstone;
+        let blessings_account: &mut Account<Blessings> = &mut ctx.accounts.blessings_account;
+        blessings_account.whose_tombstone = whose_tombstone;
+        blessings_account.worshipper = *ctx.accounts.worshipper.key;
         msg!("worship {:?}", "Bennu");
         Ok(())
     }
@@ -42,9 +40,9 @@ pub struct BuryCtx<'info> {
     #[account(
         init_if_needed,
         seeds = [
-            "solana_bury".as_bytes()
-            // whose_tombstone.as_bytes(),
-            // celebrant.key().as_ref()
+            "solana_bury".as_bytes(),
+            whose_tombstone.as_bytes(),
+            celebrant.key().as_ref()
         ],
         bump,
         payer = celebrant,
@@ -63,9 +61,9 @@ pub struct WorshipCtx<'info> {
     #[account(
         init_if_needed,
         seeds = [
-            "solana_bury".as_bytes()
-            // whose_tombstone.as_bytes(),
-            // worshipper.key().as_ref()
+            "solana_bury".as_bytes(),
+            whose_tombstone.as_bytes(),
+            worshipper.key().as_ref()
         ],
         bump,
         payer = worshipper,
@@ -83,7 +81,7 @@ pub struct Tombstone {
     //墓碑區塊
     #[max_len(32)]
     pub whose_tombstone: String,
-    // pub celebrant: Pubkey
+    pub celebrant: Pubkey
 }
 
 #[account]
@@ -92,5 +90,5 @@ pub struct Blessings {
     //祭拜祝詞區塊
     #[max_len(32)]
     pub whose_tombstone: String,
-    // pub worshipper: Pubkey
+    pub worshipper: Pubkey
 }

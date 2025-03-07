@@ -16,6 +16,7 @@ describe("solana_bury", () => {
   const program = anchor.workspace.SolanaBury as Program<SolanaBury>;
   const connection = new Connection("http://127.0.0.1:8899", "confirmed");
   const tester_pubkey = new PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp")
+  const whose_tombstone = "Bennu"
 
   // it("Is initialized!", async () => {
   //   // Add your test here.
@@ -26,25 +27,27 @@ describe("solana_bury", () => {
   it("test bury", async () => {
     // 測試埋葬指令
     let txHash;
-    let gameDateAccount;
+    let test_tombstone_account;
 
     const [bennu_tombstone_account] =
       PublicKey.findProgramAddressSync([
-        Buffer.from("solana_bury", "utf8")
-        // Buffer.from("Bennu", "utf8"),
-        // tester_pubkey.toBuffer()
+        Buffer.from("solana_bury", "utf8"),
+        Buffer.from("Bennu", "utf8"),
+        tester_pubkey.toBuffer()
         ],
         program.programId
       );
     console.log(bennu_tombstone_account)
+
     txHash = await program.methods
-      .bury()
+      .bury(whose_tombstone)
       .accounts({
         tombstone_account: bennu_tombstone_account,
         celebrant: tester_pubkey,
         systemProgram: SystemProgram.programId,
       })
       .rpc();
+    console.log(txHash)
 
     await logTransaction(txHash);
     async function logTransaction(txHash) {
