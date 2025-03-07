@@ -27,7 +27,7 @@ describe("solana_bury", () => {
   it("test bury", async () => {
     // 測試埋葬指令
     let txHash;
-
+    // 尋找墓碑pda位址
     const [bennu_tombstone_account] =
       PublicKey.findProgramAddressSync([
         Buffer.from("solana_bury_tombstone", "utf8"),
@@ -37,7 +37,7 @@ describe("solana_bury", () => {
         program.programId
       );
     console.log(bennu_tombstone_account)
-
+    // 呼叫埋葬指令
     txHash = await program.methods
       .bury(whose_tombstone)
       .accounts({
@@ -47,7 +47,7 @@ describe("solana_bury", () => {
       })
       .rpc();
     console.log(txHash)
-
+    // 確認交易成功
     await logTransaction(txHash);
     async function logTransaction(txHash) {
       const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
@@ -62,7 +62,7 @@ describe("solana_bury", () => {
   it("test worship", async () => {
     // 測試祭拜指令
     let txHash;
-
+    // 尋找祝詞pda位址
     const [bennu_blessings_account] =
       PublicKey.findProgramAddressSync([
         Buffer.from("solana_bury_blessings", "utf8"),
@@ -72,7 +72,7 @@ describe("solana_bury", () => {
         program.programId
       );
     console.log(bennu_blessings_account)
-
+    // 呼叫祭拜指令
     txHash = await program.methods
       .worship(whose_tombstone)
       .accounts({
@@ -82,7 +82,7 @@ describe("solana_bury", () => {
       })
       .rpc();
     console.log(txHash)
-
+    // 確認交易成功
     await logTransaction(txHash);
     async function logTransaction(txHash) {
       const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
