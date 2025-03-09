@@ -57,7 +57,7 @@ describe("solana_bury", () => {
         systemProgram: SystemProgram.programId,
       })
       .rpc();
-      
+
     // 確認交易成功
     await logTransaction(txHash);
   });
@@ -76,8 +76,9 @@ describe("solana_bury", () => {
       );
     console.log(bennu_blessings_account)
     // 呼叫祭拜指令
+    let offering_count = new anchor.BN(1);
     txHash = await program.methods
-      .worship(whose_tombstone)
+      .worship(whose_tombstone, "R.I.P", offering_count)
       .accounts({
         blessings_account: bennu_blessings_account,
         worshipper: tester_pubkey,

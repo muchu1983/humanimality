@@ -14,18 +14,24 @@ pub mod solana_bury {
     pub fn bury(ctx: Context<BuryCtx>, whose_tombstone: String) -> Result<()> {
         // 埋葬指令
         let tombstone_account: &mut Account<Tombstone> = &mut ctx.accounts.tombstone_account;
-        tombstone_account.whose_tombstone = whose_tombstone;
+        tombstone_account.whose_tombstone = whose_tombstone.clone();
         tombstone_account.celebrant = *ctx.accounts.celebrant.key;
-        msg!("bury {:?}", "Bennu");
+        msg!("bury {:?}", whose_tombstone);
         Ok(())
     }
 
-    pub fn worship(ctx: Context<WorshipCtx>, whose_tombstone: String) -> Result<()> {
+    pub fn worship(ctx: Context<WorshipCtx>,
+            whose_tombstone: String,
+            blessings_context: String,
+            offering_count: u64) -> Result<()> {
         // 祭拜指令
         let blessings_account: &mut Account<Blessings> = &mut ctx.accounts.blessings_account;
-        blessings_account.whose_tombstone = whose_tombstone;
+        blessings_account.whose_tombstone = whose_tombstone.clone();
         blessings_account.worshipper = *ctx.accounts.worshipper.key;
-        msg!("worship {:?}", "Bennu");
+        blessings_account.blessings_context = blessings_context.clone();
+        blessings_account.offering_count = offering_count.clone();
+        msg!("worship {:?} blessings {:?} offering {:?}",
+            whose_tombstone, blessings_context, offering_count);
         Ok(())
     }
 }
@@ -55,7 +61,10 @@ pub struct BuryCtx<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(whose_tombstone: String)]
+#[instruction(
+    whose_tombstone: String,
+    blessings_context: String,
+    offering_count: u64)]
 pub struct WorshipCtx<'info> {
     //祭拜指令所需的參數account
     #[account(
@@ -90,5 +99,8 @@ pub struct Blessings {
     //祭拜祝詞區塊
     #[max_len(32)]
     pub whose_tombstone: String,
-    pub worshipper: Pubkey
+    pub worshipper: Pubkey,
+    #[max_len(32)]
+    pub blessings_context: String,
+    pub offering_count: u64
 }
