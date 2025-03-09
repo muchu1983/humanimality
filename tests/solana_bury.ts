@@ -57,17 +57,9 @@ describe("solana_bury", () => {
         systemProgram: SystemProgram.programId,
       })
       .rpc();
-    console.log(txHash)
+      
     // 確認交易成功
     await logTransaction(txHash);
-    async function logTransaction(txHash) {
-      const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
-      await connection.confirmTransaction({
-          blockhash,
-          lastValidBlockHeight,
-          signature: txHash,
-        });
-    }
   });
 
   it("test worship", async () => {
@@ -92,18 +84,19 @@ describe("solana_bury", () => {
         systemProgram: SystemProgram.programId,
       })
       .rpc();
-    console.log(txHash)
+
     // 確認交易成功
     await logTransaction(txHash);
-    async function logTransaction(txHash) {
-      const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
-      await connection.confirmTransaction({
-          blockhash,
-          lastValidBlockHeight,
-          signature: txHash,
-        });
-    }
   });
 
+  async function logTransaction(txHash) {
+    const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
+    await connection.confirmTransaction({
+      blockhash,
+      lastValidBlockHeight,
+      signature: txHash,
+    });
+    console.log("solana confirm -v ", txHash)
+  }
 
 });
