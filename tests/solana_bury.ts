@@ -1,6 +1,8 @@
 import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
+import { Program, AnchorProvider, setProvider } from "@coral-xyz/anchor";
+// import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { SolanaBury } from "../target/types/solana_bury";
+// import idl from "../target/idl/solana_bury.json";
 import { Keypair,
          PublicKey,
          SystemProgram,
@@ -11,18 +13,27 @@ import { Keypair,
 
 describe("solana_bury", () => {
   // Configure the client to use the local cluster.
+  // test file
   anchor.setProvider(anchor.AnchorProvider.env());
-
   const program = anchor.workspace.SolanaBury as Program<SolanaBury>;
+
+  // client file
   const connection = new Connection("http://127.0.0.1:8899", "confirmed");
+  // const wallet = useAnchorWallet();
+  // const provider = new AnchorProvider(connection, wallet, {});
+  // setProvider(provider);
+  // const program = new Program(idl as SolanaBury, {
+  //   connection,
+  // });
+
   const tester_pubkey = new PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp")
   const whose_tombstone = "Bennu"
 
-  // it("Is initialized!", async () => {
-  //   // Add your test here.
-  //   const tx = await program.methods.initialize().rpc();
-  //   console.log("Your transaction signature", tx);
-  // });
+  it("Is initialized!", async () => {
+    // Add your test here.
+    const tx = await program.methods.initialize().rpc();
+    console.log("Your transaction signature", tx);
+  });
 
   it("test bury", async () => {
     // 測試埋葬指令
