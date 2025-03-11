@@ -1,23 +1,29 @@
 import * as web3 from "@solana/web3.js"
 import * as anchor from "@coral-xyz/anchor";
-import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+// import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import type { SolanaBury } from "../target/types/solana_bury";
 import idl from "../target/idl/solana_bury.json" with { type: "json" };
 import express from 'express'
 const app = express();
 const port = 8080;
 
+// connection
 const connection = new web3.Connection("http://127.0.0.1:8899", "confirmed");
 // const connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
-
 // const { connection } = useConnection();
-const wallet = useAnchorWallet();
-const provider = new anchor.AnchorProvider(connection, wallet, {});
+
+// wallet
+// const wallet = useAnchorWallet();
+const wallet = anchor.web3.Keypair.generate();
+// const wallet = anchor.AnchorProvider.env().wallet
+
+// provider
+const provider = new anchor.AnchorProvider(connection, wallet, {commitment: "confirmed",});
+// const provider = anchor.AnchorProvider.env()
+
 anchor.setProvider(provider);
 
-const program = new anchor.Program(idl as SolanaBury, {
-  connection,
-});
+const program = new anchor.Program(idl as SolanaBury, provider);
 const tester_pubkey = new web3.PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp")
 const whose_tombstone = "Bennu"
 
