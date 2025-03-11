@@ -50,6 +50,7 @@ describe("solana_bury", () => {
         celebrant: tester_pubkey,
         systemProgram: web3.SystemProgram.programId,
       })
+      .signers([])
       .rpc();
 
     // 確認交易成功
@@ -78,6 +79,7 @@ describe("solana_bury", () => {
         worshipper: tester_pubkey,
         systemProgram: web3.SystemProgram.programId,
       })
+      .signers([])
       .rpc();
 
     // 確認交易成功
