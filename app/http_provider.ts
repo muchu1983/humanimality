@@ -1,6 +1,6 @@
 import * as web3 from "@solana/web3.js"
 import * as anchor from "@coral-xyz/anchor";
-// import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import type { SolanaBury } from "../target/types/solana_bury";
 import idl from "../target/idl/solana_bury.json" with { type: "json" };
 import express from 'express'
@@ -11,9 +11,9 @@ const connection = new web3.Connection("http://127.0.0.1:8899", "confirmed");
 // const connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 // const { connection } = useConnection();
-// const wallet = useAnchorWallet();
-// const provider = new anchor.AnchorProvider(connection, wallet, {});
-// anchor.setProvider(provider);
+const wallet = useAnchorWallet();
+const provider = new anchor.AnchorProvider(connection, wallet, {});
+anchor.setProvider(provider);
 
 const program = new anchor.Program(idl as SolanaBury, {
   connection,
