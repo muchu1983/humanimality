@@ -1,32 +1,26 @@
+import * as web3 from "@solana/web3.js"
 import * as anchor from "@coral-xyz/anchor";
-import { Program, AnchorProvider, setProvider } from "@coral-xyz/anchor";
 // import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { SolanaBury } from "../target/types/solana_bury";
 // import idl from "../target/idl/solana_bury.json";
-import { Keypair,
-         PublicKey,
-         SystemProgram,
-         clusterApiUrl,
-         Connection,
-         LAMPORTS_PER_SOL
-       } from "@solana/web3.js";
 
 describe("solana_bury", () => {
   // Configure the client to use the local cluster.
   // test file
   anchor.setProvider(anchor.AnchorProvider.env());
-  const program = anchor.workspace.SolanaBury as Program<SolanaBury>;
+  const program = anchor.workspace.SolanaBury as anchor.Program<SolanaBury>;
 
-  // client file
-  const connection = new Connection("http://127.0.0.1:8899", "confirmed");
+  const connection = new web3.Connection("http://127.0.0.1:8899", "confirmed");
+
+  // http_provider file
   // const wallet = useAnchorWallet();
-  // const provider = new AnchorProvider(connection, wallet, {});
-  // setProvider(provider);
-  // const program = new Program(idl as SolanaBury, {
+  // const provider = new anchor.AnchorProvider(connection, wallet, {});
+  // anchor.setProvider(provider);
+  // const program = new anchor.Program(idl as SolanaBury, {
   //   connection,
   // });
 
-  const tester_pubkey = new PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp")
+  const tester_pubkey = new web3.PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp")
   const whose_tombstone = "Bennu"
 
   it("Is initialized!", async () => {
@@ -40,7 +34,7 @@ describe("solana_bury", () => {
     let txHash;
     // 尋找墓碑pda位址
     const [bennu_tombstone_account] =
-      PublicKey.findProgramAddressSync([
+      web3.PublicKey.findProgramAddressSync([
         Buffer.from("solana_bury_tombstone", "utf8"),
         Buffer.from("Bennu", "utf8"),
         tester_pubkey.toBuffer()
@@ -54,7 +48,7 @@ describe("solana_bury", () => {
       .accounts({
         tombstone_account: bennu_tombstone_account,
         celebrant: tester_pubkey,
-        systemProgram: SystemProgram.programId,
+        systemProgram: web3.SystemProgram.programId,
       })
       .rpc();
 
@@ -67,7 +61,7 @@ describe("solana_bury", () => {
     let txHash;
     // 尋找祝詞pda位址
     const [bennu_blessings_account] =
-      PublicKey.findProgramAddressSync([
+      web3.PublicKey.findProgramAddressSync([
         Buffer.from("solana_bury_blessings", "utf8"),
         Buffer.from("Bennu", "utf8"),
         tester_pubkey.toBuffer()
@@ -82,7 +76,7 @@ describe("solana_bury", () => {
       .accounts({
         blessings_account: bennu_blessings_account,
         worshipper: tester_pubkey,
-        systemProgram: SystemProgram.programId,
+        systemProgram: web3.SystemProgram.programId,
       })
       .rpc();
 
