@@ -1,3 +1,4 @@
+import bs58 from 'bs58';
 import * as web3 from "@solana/web3.js"
 import * as anchor from "@coral-xyz/anchor";
 // import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
@@ -14,8 +15,11 @@ const connection = new web3.Connection("http://127.0.0.1:8899", "confirmed");
 
 // wallet
 // const wallet = useAnchorWallet();
-const wallet = anchor.web3.Keypair.generate();
-// const wallet = anchor.AnchorProvider.env().wallet
+// const wallet = anchor.web3.Keypair.generate();
+// const wallet = anchor.AnchorProvider.wallet
+const wallet = web3.Keypair.fromSecretKey(Uint8Array.from(("150,142,87,98,48,79,225,72,106,138,197,128,144,90,9,53,109,86,40,93,108,246,234,143,202,129,222,110,122,19,130,23,18,179,176,139,101,175,17,157,47,235,17,111,131,43,174,142,121,89,215,221,101,39,236,13,125,238,244,224,97,12,207,205").split(",").map(Number)));
+console.log(wallet.secretKey)
+console.log(wallet.publicKey.toBase58())
 
 // provider
 const provider = new anchor.AnchorProvider(connection, wallet, {commitment: "confirmed",});
