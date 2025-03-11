@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-solana_bury = "4LxT6fYaWmQQyHf7XPcSZnX9AqQpx7Cg6wfjHPDnF8ds"
+solana_bury = "4cFbgjxb1aWA729GGsdaBdJQwkeE8Ljd3eK3xRSmP7z9"
 
 [registry]
 url = "https://api.apr.dev"
