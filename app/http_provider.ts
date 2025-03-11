@@ -18,17 +18,19 @@ const connection = new web3.Connection("http://127.0.0.1:8899", "confirmed");
 // const wallet = anchor.web3.Keypair.generate();
 // const wallet = anchor.AnchorProvider.wallet
 const wallet = web3.Keypair.fromSecretKey(Uint8Array.from(("150,142,87,98,48,79,225,72,106,138,197,128,144,90,9,53,109,86,40,93,108,246,234,143,202,129,222,110,122,19,130,23,18,179,176,139,101,175,17,157,47,235,17,111,131,43,174,142,121,89,215,221,101,39,236,13,125,238,244,224,97,12,207,205").split(",").map(Number)));
-console.log(wallet.secretKey)
-console.log(wallet.publicKey.toBase58())
+// console.log(wallet.secretKey)
+// console.log(wallet.publicKey.toBase58())
 
 // provider
-const provider = new anchor.AnchorProvider(connection, wallet, {commitment: "confirmed",});
+const provider = new anchor.AnchorProvider(connection, wallet, {});
 // const provider = anchor.AnchorProvider.env()
-
 anchor.setProvider(provider);
 
+// program
 const program = new anchor.Program(idl as SolanaBury, provider);
-const tester_pubkey = new web3.PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp")
+console.log("111111111111111111111111111111111111111111111111");
+console.log(program.provider.wallet);
+// const tester_pubkey = new web3.PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp")
 const whose_tombstone = "Bennu"
 
 // 定義路由
@@ -44,7 +46,7 @@ app.get('/bury', async (req, res) => {
     web3.PublicKey.findProgramAddressSync([
       Buffer.from("solana_bury_tombstone", "utf8"),
       Buffer.from("Bennu", "utf8"),
-      tester_pubkey.toBuffer()
+      wallet.publicKey.toBuffer()
       ],
       program.programId
     );
@@ -54,10 +56,10 @@ app.get('/bury', async (req, res) => {
     .bury(whose_tombstone)
     .accounts({
       tombstone_account: bennu_tombstone_account,
-      celebrant: tester_pubkey,
+      celebrant: wallet.publicKey,
       systemProgram: web3.SystemProgram.programId,
     })
-    .signers([])
+    .signers([wallet])
     .rpc();
 
   // 確認交易成功
