@@ -11,7 +11,7 @@ $anchor test --skip-local-validator
 
 // express http server
 cd ~/dapp_work/solana_bury
-ts-node app/http_provider.ts
+npx ts-node app/http_provider.ts
 
 // tailwildcss
 cd ~/dapp_work/solana_bruy/app/public
