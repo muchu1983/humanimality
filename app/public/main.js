@@ -5,53 +5,52 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('myForm');
     const inputField = document.getElementById('inputField');
 
-    // 显示模态框
+    // 顯示輸入框
     bury_trigger.addEventListener('click', () => {
         console.log('click');
         modal.classList.remove('hidden');
         inputField.focus();
     });
 
-    // 隐藏模态框
+    // 隱藏輸入框
     const hideModal = () => {
         modal.classList.add('hidden');
         inputField.value = '';
     };
 
-    // 取消按钮
+    // 監聽取消按鈕
     cancelBtn.addEventListener('click', hideModal);
 
-    // 点击背景关闭
+    // 點擊背景關閉
     modal.addEventListener('click', (e) => {
         if (e.target === modal) hideModal();
     });
 
-    // 表单提交
+    // 表單提交
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const content = inputField.value.trim();
-        if (!content) return;
+        const whose_tombstone = inputField.value.trim();
+        if (!whose_tombstone) return;
 
         try {
-            // 发送 POST 请求
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            // 發送 POST 
+            const response = await fetch('/bury', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    title: content,
-                    body: '示例内容',
-                    userId: 1
+                    title: 'bury_whose_tombstone',
+                    body: whose_tombstone
                 })
             });
 
-            if (!response.ok) throw new Error('请求失败');
+            // if (!response.ok) throw new Error('请求失败');
 
-            const data = await response.json();
-            console.log('提交成功:', data);
-            alert(`提交成功！ID: ${data.id}`);
+            // const data = await response.json();
+            // console.log('提交成功:', data);
+            // alert(`提交成功！ID: ${data.id}`);
             hideModal();
 
         } catch (error) {

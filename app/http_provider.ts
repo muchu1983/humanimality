@@ -15,6 +15,13 @@ app.get('/bury', async (req, res) => {
     res.send('bury some...<a href="/index.html">回主頁</a>');
 });
 
+// 測試埋葬指令
+app.post('/bury', async (req, res) => {
+    console.log('111111111111111111111111111111111111111111post')
+    do_bury()
+    res.send('post bury some...<a href="/index.html">回主頁</a>');
+});
+
 // 測試祭拜指令
 app.get('/worship', async (req, res) => {
     do_worship()
