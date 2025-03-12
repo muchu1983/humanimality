@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const bury_trigger = document.getElementById('bury_trigger');
     const modal = document.getElementById('modal');
-    const cancelBtn = document.getElementById('cancelBtn');
+    const cancelBtn = document.getElementById('cancel_btn');
     const form = document.getElementById('myForm');
     const inputField = document.getElementById('inputField');
 
