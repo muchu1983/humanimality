@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("7CenHgCyRR9gfjJctCXykCFknPFrEkSf4zqN6mmuMyR2");
+declare_id!("5Sns64Kx8c4g7ppsVCSCbwtagQhni4HStLCsSaabqpLg");
 
 #[program]
 pub mod solana_bury {
