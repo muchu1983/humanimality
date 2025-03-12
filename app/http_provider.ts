@@ -47,7 +47,7 @@ const whose_tombstone = "Bennu"
 
 // 定義路由
 app.get('/', (req, res) => {
-  res.send('Welcome to solana_bury project.');
+  res.send('\uD840\uDC03\uD840\uDC03\uD840\uDC03Welcome to solana_bury project.𠀃𠀃𠀃');
 });
 
 app.get('/bury', async (req, res) => {
@@ -119,6 +119,8 @@ async function logTransaction(txHash) {
   console.log('solana confirm -v ', txHash);
 }
 
+// 使用靜態中間件
+app.use(express.static('app/public')); 
 // 啟動http服務
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
