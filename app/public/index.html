@@ -28,16 +28,17 @@
             </a>
         </div>
     </div>
-    <div id="modal" class="hidden">
-        <div class="">
-            <h2 class="">输入内容</h2>
-            <form id="myForm">
-                <input type="text" id="inputField" placeholder="请输入内容" class="" required>
-                <div class="">
-                    <button type="button" id="cancelBtn" class="">
+    <div id="modal" class="hidden fixed inset-0 flex items-center justify-center">
+        <div class="bg-white p-6 rounded w-50">
+            <h2 class="text-xl font-bold mb-4">输入信息</h2>
+            <form id="myForm" class="grid grid-cols-1 w-40">
+                <input type="text" id="name" placeholder="姓名" class="w-40 p-2 mb-4 border rounded focus:ring-2 focus:ring-blue-400 outline-none" required>
+                <input type="email" id="email" placeholder="邮箱" class="w-40 p-2 mb-4 border rounded focus:ring-2 focus:ring-blue-400 outline-none" required>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancel" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">
                         取消
                     </button>
-                    <button type="submit" class="">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
                         提交
                     </button>
                 </div>

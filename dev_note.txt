@@ -15,4 +15,5 @@ npx ts-node app/http_provider.ts
 
 // tailwildcss
 cd ~/dapp_work/solana_bruy/app/public
-ncx @tailwildcss/cli -i ./input.css ./output.css
+npx @tailwindcss/cli -i ./tailwindcss_input.css -o ./tailwindcss_output.css
+<link href="/tailwindcss_output.css" rel="stylesheet">
