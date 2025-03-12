@@ -1,7 +1,8 @@
+import BN from 'bn.js';
 import * as web3 from "@solana/web3.js"
 import * as anchor from "@coral-xyz/anchor";
 // import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { SolanaBury } from "../target/types/solana_bury";
+import type { SolanaBury } from "../target/types/solana_bury";
 // import idl from "../target/idl/solana_bury.json";
 
 describe("solana_bury", () => {
@@ -71,7 +72,7 @@ describe("solana_bury", () => {
       );
     console.log(bennu_blessings_account)
     // 呼叫祭拜指令
-    let offering_count = new anchor.BN(1);
+    let offering_count = new BN(1);
     txHash = await program.methods
       .worship(whose_tombstone, "R.I.P", offering_count)
       .accounts({
