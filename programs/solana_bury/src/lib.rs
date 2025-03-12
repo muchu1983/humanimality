@@ -100,7 +100,7 @@ pub struct Blessings {
     #[max_len(64)]
     pub whose_tombstone: String,
     pub worshipper: Pubkey,
-    #[max_len(1280)]
+    #[max_len(128)]
     pub blessings_context: String,
     pub offering_count: u64
 }
