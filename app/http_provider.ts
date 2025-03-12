@@ -76,7 +76,7 @@ app.get('/bury', async (req, res) => {
 
   // 確認交易成功
   await logTransaction(txHash);
-  res.send('bury some...');
+  res.send('bury some...<a href="/index.html">回主頁</a>');
 });
 
 app.get('/worship', async (req, res) => {
@@ -106,7 +106,7 @@ app.get('/worship', async (req, res) => {
 
   // 確認交易成功
   await logTransaction(txHash);
-  res.send('worship some...');
+  res.send('worship some...<a href="/index.html">回主頁</a>');
 });
 
 async function logTransaction(txHash) {
