@@ -1,0 +1,18 @@
+// reset local
+cd ~/dapp_work
+$solana-test-validator --reset
+
+// anchor
+cd ~/dapp_work/solana_bury
+$anchor build
+$anchor keys sync
+$anchor deploy
+$anchor test --skip-local-validator
+
+// express http server
+cd ~/dapp_work/solana_bury
+ts-node app/http_provider.ts
+
+// tailwildcss
+cd ~/dapp_work/solana_bruy/app/public
+ncx @tailwildcss/cli -i ./input.css ./output.css
