@@ -40,26 +40,26 @@ anchor.setProvider(provider);
 const program = new anchor.Program(idl as SolanaBury, provider);
 
 // const tester_pubkey = new web3.PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp");
-const whose_tombstone = "Bennu"
+let whose_tombstone = "Bennu"
 
-export async function do_bury(): Promise < void > {
+export async function do_bury(input_whose_tombstone): Promise < void > {
     // 測試埋葬指令
     let txHash;
     // 尋找墓碑pda位址
-    const [bennu_tombstone_account] =
+    const [input_tombstone_account] =
     web3.PublicKey.findProgramAddressSync([
             Buffer.from('solana_bury_tombstone', 'utf8'),
-            Buffer.from('Bennu', 'utf8'),
+            Buffer.from(input_whose_tombstone, 'utf8'),
             wallet.publicKey.toBuffer()
         ],
         program.programId
     );
-    console.log(bennu_tombstone_account);
+    console.log(input_tombstone_account);
     // 呼叫埋葬指令
     txHash = await program.methods
-    .bury(whose_tombstone)
+    .bury(input_whose_tombstone)
     .accounts({
-        tombstone_account: bennu_tombstone_account,
+        tombstone_account: input_tombstone_account,
         celebrant: wallet.publicKey,
         systemProgram: web3.SystemProgram.programId,
     })

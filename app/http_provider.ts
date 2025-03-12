@@ -26,9 +26,9 @@ app.post('/bury', async (req, res) => {
         return res.status(400).json({ error: 'Invalid data format' });
     }
 
-    const whose_tombstone = received_data.bury_whose_tombstone
+    const whose_tombstone: string = received_data.bury_whose_tombstone
     console.log(`bury ${whose_tombstone}`);
-    do_bury();
+    do_bury(whose_tombstone);
 
     res.json({
         status: 'success',
