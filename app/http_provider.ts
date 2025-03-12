@@ -1,10 +1,11 @@
 import bs58 from 'bs58';
-import * as web3 from "@solana/web3.js"
+import BN from 'bn.js';
+import * as web3 from "@solana/web3.js";
 import * as anchor from "@coral-xyz/anchor";
 // import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import type { SolanaBury } from "../target/types/solana_bury";
 import idl from "../target/idl/solana_bury.json" with { type: "json" };
-import express from 'express'
+import express from 'express';
 const app = express();
 const port = 8080;
 
@@ -77,10 +78,35 @@ app.get('/bury', async (req, res) => {
   res.send("bury some...");
 });
 
-app.get('/worship', (req, res) => {
+app.get('/worship', async (req, res) => {
+  // 測試祭拜指令
+  let txHash;
+  // 尋找祝詞pda位址
+  const [bennu_blessings_account] =
+    web3.PublicKey.findProgramAddressSync([
+      Buffer.from("solana_bury_blessings", "utf8"),
+      Buffer.from("Bennu", "utf8"),
+      wallet.publicKey.toBuffer()
+      ],
+      program.programId
+    );
+  console.log(bennu_blessings_account)
+  // 呼叫祭拜指令
+  let offering_count = new BN(10);
+  txHash = await program.methods
+    .worship(whose_tombstone, "R.I.P", offering_count)
+    .accounts({
+      blessings_account: bennu_blessings_account,
+      worshipper: wallet.publicKey,
+      systemProgram: web3.SystemProgram.programId,
+    })
+    .signers([])
+    .rpc();
+
+  // 確認交易成功
+  await logTransaction(txHash);
   res.send('worship some...');
 });
-
 
 async function logTransaction(txHash) {
   const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
