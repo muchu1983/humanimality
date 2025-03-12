@@ -88,7 +88,7 @@ pub struct WorshipCtx<'info> {
 #[derive(InitSpace)]
 pub struct Tombstone {
     //墓碑區塊
-    #[max_len(32)]
+    #[max_len(64)]
     pub whose_tombstone: String,
     pub celebrant: Pubkey
 }
@@ -97,10 +97,10 @@ pub struct Tombstone {
 #[derive(InitSpace)]
 pub struct Blessings {
     //祭拜祝詞區塊
-    #[max_len(32)]
+    #[max_len(64)]
     pub whose_tombstone: String,
     pub worshipper: Pubkey,
-    #[max_len(32)]
+    #[max_len(1280)]
     pub blessings_context: String,
     pub offering_count: u64
 }
