@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         const whose_tombstone = inputField.value.trim();
+        console.log(whose_tombstone)
         if (!whose_tombstone) return;
 
         try {
@@ -41,8 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    title: 'bury_whose_tombstone',
-                    body: whose_tombstone
+                    bury_whose_tombstone: whose_tombstone
                 })
             });
 
