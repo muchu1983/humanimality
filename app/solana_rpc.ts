@@ -42,9 +42,10 @@ const program = new anchor.Program(idl as SolanaBury, provider);
 // const tester_pubkey = new web3.PublicKey("2G1FuUFXviRVr4FX8H8eZtR2WmVBAdFxnUWrxBJDMGvp");
 let whose_tombstone = "Bennu"
 
-export async function do_bury(input_whose_tombstone): Promise < void > {
+export async function do_bury(input_whose_tombstone: string): Promise < void > {
     // 測試埋葬指令
     let txHash;
+    // TODO 儲存 celebrant pubkey 及 whose_tombstone 到 http_provider 的 localdb
     // 尋找墓碑pda位址
     const [input_tombstone_account] =
     web3.PublicKey.findProgramAddressSync([
@@ -73,6 +74,7 @@ export async function do_bury(input_whose_tombstone): Promise < void > {
 export async function do_worship(): Promise < void > {
     // 測試祭拜指令
     let txHash;
+    // TODO 儲存 worship pubkey 及 whose_tombstone 到 http_provider 的 localdb
     // 尋找祝詞pda位址
     const [bennu_blessings_account] =
     web3.PublicKey.findProgramAddressSync([
