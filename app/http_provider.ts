@@ -6,7 +6,8 @@ const port = 8080;
 
 // use 中間件必須放在 路由前面
 app.use(express.static('app/public')); // 使用靜態中間件
-app.use(express.json()); // 使用 json 中間件
+app.use(express.json()); // 使用json中間件
+app.use(express.urlencoded({ extended: true })); // 使用urlencoded中間件
 
 // 定義路由
 app.get('/', (req, res) => {
