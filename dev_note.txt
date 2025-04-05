@@ -1,3 +1,7 @@
+// wsl2 ip forwarding
+netsh interface portproxy show v4tov4
+netsh interface portproxy add v4tov4 listenport=80 listenaddress=0.0.0.0 connectport=8080 connectaddress=172.23.61.1
+
 // reset local
 cd ~/dapp_work
 $solana-test-validator --reset
