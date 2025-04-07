@@ -10,16 +10,16 @@
     <title>Solana Bury 主頁</title>
 </head>
 
-<body class="bg-gray-300 p-8">
+<body class="bg-gray-30 p-8">
     <div class="container max-w-4xl mx-auto">
         <h1 class="text-3xl font-bold ">𠀃𠀃𠀃 Welcome to solana_bury project. 𠀃𠀃𠀃</h1>
         <!-- 網格容器 -->
         <div class="flex flex gap-4">
             <!-- 祭拜 -->
-            <div id="worship_trigger" class="block p-6 bg-white hover:bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-500 transition-all">祭拜
+            <div id="worship_trigger" class="block p-6 bg-yellow-100 hover:bg-yellow-50 rounded-lg border border-gray-200 hover:border-blue-500 transition-all">祭拜
             </div>
             <!-- 埋葬 -->
-            <div id="bury_trigger" class="block p-6 bg-white hover:bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-500 transition-all">埋葬
+            <div id="bury_trigger" class="block p-6 bg-green-100 hover:bg-green-50 rounded-lg border border-gray-200 hover:border-blue-500 transition-all">埋葬
             </div>
             <!-- 錢包 -->
             <a href="#" class="block p-6 bg-white hover:bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-500 transition-all">
@@ -28,8 +28,8 @@
             </a>
         </div>
     </div>
-    <div id="bury_modal" class="hidden fixed inset-0 flex items-center justify-center">
-        <div class="bg-black p-6 rounded">
+    <div id="bury_modal" class="hidden bg-green fixed inset-0 flex items-center justify-center">
+        <div class="p-6 rounded">
             <h2 class="text-xl font-bold mb-4">[埋葬]墓的主人是？</h2>
             <form id="bury_form" class="grid grid-cols-1">
                 <input type="text" id="buryInputField" placeholder="姓名" class="w-full p-2 mb-4 border rounded focus:ring-2 focus:ring-blue-400 outline-none" required>
@@ -44,8 +44,8 @@
             </form>
         </div>
     </div>
-    <div id="worship_modal" class="hidden fixed inset-0 flex items-center justify-center">
-        <div class="bg-black p-6 rounded">
+    <div id="worship_modal" class="hidden bg-yellow fixed inset-0 flex items-center justify-center">
+        <div class="p-6 rounded">
             <h2 class="text-xl font-bold mb-4">[祭拜]墓的主人是？</h2>
             <form id="worship_form" class="grid grid-cols-1">
                 <input type="text" id="worshipInputField" placeholder="姓名" class="w-full p-2 mb-4 border rounded focus:ring-2 focus:ring-blue-400 outline-none" required>

@@ -18,6 +18,8 @@ cd ~/dapp_work/solana_bury
 npx ts-node app/http_provider.ts
 
 // tailwildcss
-cd ~/dapp_work/solana_bruy/app/public
-npx @tailwindcss/cli -i ./tailwindcss_input.css -o ./tailwindcss_output.css --watch
+cd ~/dapp_work/solana_bruy/
+npx @tailwindcss/cli \
+-i ./app/public/tailwindcss_input.css \
+-o ./app/public/tailwindcss_output.css --watch
 <link href="/tailwindcss_output.css" rel="stylesheet">
