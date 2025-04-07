@@ -71,26 +71,26 @@ export async function do_bury(input_whose_tombstone: string): Promise < void > {
     await logTransaction(txHash);
 };
 
-export async function do_worship(): Promise < void > {
+export async function do_worship(input_whose_tombstone: string): Promise < void > {
     // 測試祭拜指令
     let txHash;
     // TODO 儲存 worship pubkey 及 whose_tombstone 到 http_provider 的 localdb
     // 尋找祝詞pda位址
-    const [bennu_blessings_account] =
+    const [input_blessings_account] =
     web3.PublicKey.findProgramAddressSync([
-            Buffer.from('solana_bury_blessings', 'utf8'),
-            Buffer.from('Bennu', 'utf8'),
+            Buffer.from('solana_worship_blessings', 'utf8'),
+            Buffer.from(input_whose_tombstone, 'utf8'),
             wallet.publicKey.toBuffer()
         ],
         program.programId
     );
-    console.log(bennu_blessings_account);
+    console.log(input_blessings_account);
     // 呼叫祭拜指令
     let offering_count = new BN(10);
     txHash = await program.methods
-    .worship(whose_tombstone, 'R.I.P', offering_count)
+    .worship(input_whose_tombstone, 'R.I.P', offering_count)
     .accounts({
-        blessings_account: bennu_blessings_account,
+        blessings_account: input_blessings_account,
         worshipper: wallet.publicKey,
         systemProgram: web3.SystemProgram.programId,
     })

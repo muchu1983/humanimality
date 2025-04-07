@@ -74,7 +74,7 @@ describe("solana_bury", () => {
     // 尋找祝詞pda位址
     const [bennu_blessings_account] =
       web3.PublicKey.findProgramAddressSync([
-        Buffer.from("solana_bury_blessings", "utf8"),
+        Buffer.from("solana_worship_blessings", "utf8"),
         Buffer.from("Bennu", "utf8"),
         wallet.publicKey.toBuffer()
         ],

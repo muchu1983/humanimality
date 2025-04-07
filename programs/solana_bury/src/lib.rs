@@ -70,7 +70,7 @@ pub struct WorshipCtx<'info> {
     #[account(
         init_if_needed,
         seeds = [
-            "solana_bury_blessings".as_bytes(),
+            "solana_worship_blessings".as_bytes(),
             whose_tombstone.as_bytes(),
             worshipper.key().as_ref()
         ],

@@ -14,13 +14,13 @@ app.get('/', (req, res) => {
     res.redirect(301, '/index.html');
 });
 
-// 測試埋葬指令
+// Get埋葬指令
 app.get('/bury', async (req, res) => {
     do_bury();
     res.send('bury some...<a href="/index.html">回主頁</a>');
 });
 
-// 測試埋葬指令
+// Post埋葬指令
 app.post('/bury', async (req, res) => {
     const received_data = req.body;
     if (!received_data || !received_data.bury_whose_tombstone) {
@@ -37,10 +37,27 @@ app.post('/bury', async (req, res) => {
     });
 });
 
-// 測試祭拜指令
+// Get祭拜指令
 app.get('/worship', async (req, res) => {
     do_worship();
     res.send('worship some...<a href="/index.html">回主頁</a>');
+});
+
+// Post祭拜指令
+app.post('/worship', async (req, res) => {
+    const received_data = req.body;
+    if (!received_data || !received_data.worship_whose_tombstone) {
+        return res.status(400).json({ error: 'Invalid data format' });
+    }
+
+    const whose_tombstone: string = received_data.worship_whose_tombstone
+    console.log(`worship ${whose_tombstone}`);
+    do_worship(whose_tombstone);
+
+    res.json({
+        status: 'success',
+        received: received_data
+    });
 });
 
 // 啟動http服務
