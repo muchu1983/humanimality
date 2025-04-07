@@ -28,16 +28,32 @@
             </a>
         </div>
     </div>
-    <div id="modal" class="hidden fixed inset-0 flex items-center justify-center">
+    <div id="bury_modal" class="hidden fixed inset-0 flex items-center justify-center">
         <div class="bg-black p-6 rounded">
-            <h2 class="text-xl font-bold mb-4">墓的主人是？</h2>
-            <form id="myForm" class="grid grid-cols-1">
-                <input type="text" id="inputField" placeholder="姓名" class="w-full p-2 mb-4 border rounded focus:ring-2 focus:ring-blue-400 outline-none" required>
+            <h2 class="text-xl font-bold mb-4">[埋葬]墓的主人是？</h2>
+            <form id="bury_form" class="grid grid-cols-1">
+                <input type="text" id="buryInputField" placeholder="姓名" class="w-full p-2 mb-4 border rounded focus:ring-2 focus:ring-blue-400 outline-none" required>
                 <div class="flex justify-end space-x-3">
-                    <button type="button" id="cancel_btn" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">
+                    <button type="button" id="bury_cancel_btn" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">
                         取消
                     </button>
                     <button type="submit" id="bury_trigger" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+                        提交
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="worship_modal" class="hidden fixed inset-0 flex items-center justify-center">
+        <div class="bg-black p-6 rounded">
+            <h2 class="text-xl font-bold mb-4">[祭拜]墓的主人是？</h2>
+            <form id="worship_form" class="grid grid-cols-1">
+                <input type="text" id="worshipInputField" placeholder="姓名" class="w-full p-2 mb-4 border rounded focus:ring-2 focus:ring-blue-400 outline-none" required>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="worship_cancel_btn" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">
+                        取消
+                    </button>
+                    <button type="submit" id="worship_trigger" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
                         提交
                     </button>
                 </div>
