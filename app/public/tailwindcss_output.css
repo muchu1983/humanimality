@@ -277,8 +277,13 @@
   .bg-blue-500 {
     background-color: var(--color-blue-500);
   }
+<<<<<<< HEAD
   .bg-green-100 {
     background-color: var(--color-green-100);
+=======
+  .bg-gray-300 {
+    background-color: var(--color-gray-300);
+>>>>>>> main
   }
   .bg-white {
     background-color: var(--color-white);

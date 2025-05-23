@@ -7,19 +7,25 @@ cd ~/dapp_work
 $solana-test-validator --reset
 
 // anchor
-cd ~/dapp_work/solana_bury
+cd ~/dapp_work/humanimality
 $anchor build
 $anchor keys sync
 $anchor deploy
+$npm i ts-mocha
 $anchor test --skip-local-validator
 
 // express http server
-cd ~/dapp_work/solana_bury
+cd ~/dapp_work/humanimality
 npx ts-node app/http_provider.ts
 
 // tailwildcss
+<<<<<<< HEAD
 cd ~/dapp_work/solana_bruy/
 npx @tailwindcss/cli \
 -i ./app/public/tailwindcss_input.css \
 -o ./app/public/tailwindcss_output.css --watch
+=======
+cd ~/dapp_work/humanimality/app/public
+npx @tailwindcss/cli -i ./tailwindcss_input.css -o ./tailwindcss_output.css --watch
+>>>>>>> main
 <link href="/tailwindcss_output.css" rel="stylesheet">
