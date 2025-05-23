@@ -5,8 +5,8 @@ import BN from 'bn.js';
 import * as web3 from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 // import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
-import type { SolanaBury } from '../target/types/solana_bury';
-import idl from '../target/idl/solana_bury.json' with { type: 'json' };
+import type { Humanimality } from '../target/types/humanimality';
+import idl from '../target/idl/humanimality.json' with { type: 'json' };
 
 // connection
 // const { connection } = useConnection();

@@ -871,6 +871,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "humanimality"
+version = "0.1.0"
+dependencies = [
+ "anchor-lang",
+]
+
+[[package]]
 name = "im"
 version = "15.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1571,13 +1578,6 @@ dependencies = [
  "quote",
  "rustversion",
  "syn 2.0.99",
-]
-
-[[package]]
-name = "solana_bury"
-version = "0.1.0"
-dependencies = [
- "anchor-lang",
 ]
 
 [[package]]
