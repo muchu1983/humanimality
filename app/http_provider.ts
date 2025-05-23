@@ -16,7 +16,6 @@ app.get('/', (req, res) => {
 
 // Get埋葬指令
 app.get('/bury', async (req, res) => {
-    do_bury();
     res.send('bury some...<a href="/index.html">回主頁</a>');
 });
 
@@ -39,7 +38,6 @@ app.post('/bury', async (req, res) => {
 
 // Get祭拜指令
 app.get('/worship', async (req, res) => {
-    do_worship();
     res.send('worship some...<a href="/index.html">回主頁</a>');
 });
 
